@@ -1,4 +1,5 @@
 
+
 from enum import Enum
 from boardstate import *
 
@@ -48,7 +49,7 @@ class Gomoku(object):
         player,
         ):
         count = 0
-        for step in range(1, 5):  
+        for step in range(1, 5):  # look four more steps on a certain direction
             if xdirection != 0 and (j + xdirection * step < 0 or j
                                     + xdirection * step >= N):
                 break
@@ -69,6 +70,7 @@ class Gomoku(object):
         player,
         ):
 
+        # four directions: horizontal, vertical, two diagonals
 
         directions = [[(-1, 0), (1, 0)], [(0, -1), (0, 1)], [(-1, 1),
                       (1, -1)], [(-1, -1), (1, 1)]]
