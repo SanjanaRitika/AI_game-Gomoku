@@ -1,4 +1,4 @@
-const SIZE = 20;
+const SIZE = 10;
 
 class Board{
     constructor(parentNode, onSquareClickedCb) {
