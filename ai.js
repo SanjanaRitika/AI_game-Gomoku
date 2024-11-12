@@ -1,70 +1,72 @@
 /****
- *   GomokuAI class
- *
- *   Basic implementation of the minimax algorithm to determine the optimal move.
- *
- *   Uses a WebWorker to prevent the main UI from freezing.
- */
-let calculationCount = 0;
+    *   GameAI class
+    *
+    *   Simple implementation of minimax algorithm to determine best move to
+    *   play.
+    *
+    *   Execute a WebWorker to prevent freezing the main UI.
+*/
+let totalCalcs = 0;
 
-class GomokuAI {
-    constructor(gameBoard){
-        this.gameBoard = gameBoard;
+class GameAI {
+    constructor(board){
+        this.board = board;
     }
 
-    findBestMove(){
+    getNextMove(){
         return new Promise((resolve, reject) => {
 
-            let matrixState = this.gameBoard.getRawMatrix();
-            let offset = null;
-            ({matrix: matrixState, off: offset} = Board.reduceMatrix(matrixState, 5));
-            const workerInstance = new Worker('worker.js');
+            let matrix = this.board.getRawMatrix();
+            let off = null;
+            ({matrix, off} = Board.pruneMatrix(matrix, 5));
+            let worker = new Worker('worker.js');
 
-            workerInstance.onmessage = event => {
+            worker.onmessage = event => {
                 if(!event.data){
-                    reject('Move calculation failed');
+                    reject('could not calculate move');
                 }
 
                 switch(event.data.type){
                     case 'move':
-                        let [row, col] = event.data.val;
-                        resolve([row + offset.y, col + offset.x]);
-                        workerInstance.terminate();
+                        let [y, x] = event.data.val;
+                        resolve([y+off.y, x+off.x]);
+                        worker.terminate();
                         break;
                     case 'progress':
-                        let completed = event.data.val.completed;
-                        let total = event.data.val.total;
-                        let progressPercentage = Math.round((completed / total) * 100);
-                        document.dispatchEvent(new CustomEvent("progress", {"detail": progressPercentage}));
+                        let percent = event.data.val.completed * 100;
+                        percent /= event.data.val.total;
+                        percent = Math.round(percent);
+                        document.dispatchEvent(new CustomEvent("progress", {"detail": percent}));
                         break;
-                    case 'log':
-                        // Handle logging messages
+                    case 'console':
+                        // todo add console messages to sidebar
                         break;
                     case 'debug':
-                        // Process debugging events
+                        // debug events
                         break;
                 }
-            };
+            }
 
-            workerInstance.onError = error => {
+            worker.onError = error => {
                 reject(error);
-            };
+            }
 
-            workerInstance.postMessage({
-                matrix: matrixState,
-                fn: serializeFunction(Board.evaluateWinner)
+            worker.postMessage({
+                matrix: matrix,
+                fn: serializedFn(Board.checkWinner3)
             });
         });
 
-        function serializeFunction(fn){
-            const functionName = fn.name;
-            const functionBody = fn.toString();
+        function serializedFn(fn){
+            let name = fn.name;
+            fn = fn.toString();
 
             return {
-                name: functionName,
-                args: functionBody.substring(functionBody.indexOf("(") + 1, functionBody.indexOf(")")),
-                body: functionBody.substring(functionBody.indexOf("{") + 1, functionBody.lastIndexOf("}"))
-            };
+                name: name,
+                args: fn.substring(fn.indexOf("(") + 1, fn.indexOf(")")),
+                body: fn.substring(fn.indexOf("{") + 1, fn.lastIndexOf("}"))
+            }
         }
+
     }
 }
