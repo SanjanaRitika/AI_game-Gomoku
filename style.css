@@ -1,204 +1,204 @@
 body {
-    margin: 0;
-    background-color: #000;
-    position: relative;
+  margin: 0;
+  background-color: #000;
+  position: relative;
 }
 
 #container {
-    margin: 0;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 #title {
-    background: url('title.png');
-    width: 745px;
-    height: 200px;
-    background-size: cover;
-    margin: -130px auto 0;
+  background: url("title.png");
+  width: 745px;
+  height: 200px;
+  background-size: cover;
+  margin: -130px auto 0;
 }
 
 #progress-container {
-    width: 621px;
-    height: 20px;
-    margin: -20px auto 30px;
+  width: 621px;
+  height: 20px;
+  margin: -20px auto 30px;
 }
 
 #progress-background {
-    width: 90%;
-    margin: 0 auto;
-    height: 3px;
-    background-color: #4d004c;
+  width: 90%;
+  margin: 0 auto;
+  height: 3px;
+  background-color: #4d004c;
 }
 
 #progress {
-    height: 100%;
-    width: 100%;
-    background-color: #f0f;
+  height: 100%;
+  width: 100%;
+  background-color: #f0f;
 }
 
 .slide {
-    transition: width 0.5s linear 0s;
+  transition: width 0.5s linear 0s;
 }
 
 #board {
-    width: 621px;
-    height: 621px;
-    margin: -20px auto 0;
+  width: 621px;
+  height: 621px;
+  margin: -20px auto 0;
 }
 
 #board .row {
-    width: 100%;
-    float: left;
+  width: 100%;
+  float: left;
 }
 
 #board .row:last-child div {
-    border-bottom: 1px solid #f0f;
+  border-bottom: 1px solid #f0f;
 }
 
 .row div:last-child {
-    border-right: 1px solid #f0f;
+  border-right: 1px solid #f0f;
 }
 
 .square {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border-left: 1px solid #f0f;
-    border-top: 1px solid #f0f;
-    cursor: pointer;
-    transition: background-color 0.1s linear;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-left: 1px solid #f0f;
+  border-top: 1px solid #f0f;
+  cursor: pointer;
+  transition: background-color 0.1s linear;
 }
 
-.square:hover{
-    background-color: #f0f4;
+.square:hover {
+  background-color: #f0f4;
 }
 
 .orange {
-    background-color: #fa0;
+  background-color: #fa0;
 }
 
 .orange:hover {
-    background-color: #fa0;
-    cursor: unset;
+  background-color: #fa0;
+  cursor: unset;
 }
 
 .green {
-    background-color: #0f1;
+  background-color: #0f1;
 }
 
 .green:hover {
-    background-color: #0f1;
-    cursor: unset;
+  background-color: #0f1;
+  cursor: unset;
 }
 
 .white {
-    background-color: #fff;
-    cursor: unset;
+  background-color: #fff;
+  cursor: unset;
 }
 
 .white:hover {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 #footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 20px;
-    color: #f0f;
-    font-family: monospace;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  color: #f0f;
+  font-family: monospace;
 }
 
 #footer a {
-    color: #f0f;
-    margin-right: 30px;
+  color: #f0f;
+  margin-right: 30px;
 }
 
 .left {
-    display: inline-block;
-    float: left;
+  display: inline-block;
+  float: left;
 }
 
 .right {
-    display: inline-block;
-    float: right;
+  display: inline-block;
+  float: right;
 }
 
 .overlay {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom:0;
-    width: 100%;
-    z-index: 10;
-    background-color: #380038f2;
-    color: #fff;
-    font-family: monospace;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: #380038f2;
+  color: #fff;
+  font-family: monospace;
 }
 
 .overlay h1 {
-    text-align:center;
-    font-size: 40px;
+  text-align: center;
+  font-size: 40px;
 }
 
 .overlay .gameover {
-    text-align: center;
+  text-align: center;
 }
 
 .overlay .gameover a {
-    color: #fff;
-    cursor: pointer;
-    padding: 3px;
+  color: #fff;
+  cursor: pointer;
+  padding: 3px;
 }
 
 .overlay .gameover a:hover {
-    border-bottom: 2px solid;
+  border-bottom: 2px solid;
 }
 
 .overlay .gameover h1 {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 .overlay #play-again {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .overlay .options {
-    margin: 100px;
+  margin: 100px;
 }
 
 .overlay .options a {
-    margin: 10px;
-    text-decoration: none;
+  margin: 10px;
+  text-decoration: none;
 }
 
 .overlay .text-holder {
-    overflow-y: auto;
-    height: 100%;
-    margin: 0 120px;
+  overflow-y: auto;
+  height: 100%;
+  margin: 0 120px;
 }
 
 .overlay p {
-    margin: 20px 0;
-    font-size: 18px;
-    line-height: 1.5em;
+  margin: 20px 0;
+  font-size: 18px;
+  line-height: 1.5em;
 }
 
 .overlay .close {
-    position: fixed;
-    top: 15px;
-    right: 20;
-    font-size: 16px;
-    cursor: pointer;
+  position: fixed;
+  top: 15px;
+  right: 20;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .overlay .close:hover {
-    border-bottom: 2px solid;
+  border-bottom: 2px solid;
 }
