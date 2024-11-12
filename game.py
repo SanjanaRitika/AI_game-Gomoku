@@ -32,7 +32,7 @@ if __name__ == '__main__':
             ai2.one_step()
             result = gomoku.get_chess_result()
             if result != BoardState.EMPTY:
-                print result, "wins"
+                print (result, "wins")
                 break
             if enable_ai:
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
                 result = gomoku.get_chess_result()
 
                 if result != BoardState.EMPTY:
-                    print result, "wins"
+                    print (result, "wins")
                     break
             else:
                 render.change_state()
