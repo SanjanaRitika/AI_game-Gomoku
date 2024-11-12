@@ -33,28 +33,28 @@ onmessage = (event) => {
   sendMove(this.move);
 };
 
-async function bestMove(matrix) {
-  const startTime = performance.now();
-  const timeLimit = 1000;  // Set your time limit in milliseconds (e.g., 1000 ms = 1 second)
-
+function bestMove(matrix) {
   let bestScore = -Infinity;
-  let bestMove = null;
-  const squares = getSquaresToCheck(matrix);
 
-  for (const [y, x] of squares) {
-      matrix[y][x] = -1;
-      const score = alphabeta(matrix, 0, -Infinity, Infinity, false, startTime, timeLimit);
-      matrix[y][x] = 0;
+  let squares = getSquaresToCheck(matrix);
 
-      if (score > bestScore) {
-          bestScore = score;
-          bestMove = [y, x];
-      }
+  for (let i = 0; i < squares.length; i++) {
+    let [y, x] = squares[i];
+    matrix[y][x] = -1;
+    let score = alphabeta(matrix, 0, -Infinity, Infinity, false);
+    matrix[y][x] = 0;
+
+    console.log("%s evaluated to %s", JSON.stringify([y, x]), score);
+    sendProgress(i + 1, squares.length);
+
+    if (score > bestScore) {
+      bestScore = score;
+      this.move = [y, x];
+    }
   }
 
-  return bestMove;
+  return move;
 }
-
 
 function alphabeta(matrix, depth, alpha, beta, isAiTurn, startTime, timeLimit) {
   // Check if the time limit is exceeded for early stopping
