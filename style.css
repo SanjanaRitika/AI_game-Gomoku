@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: #f0f0f0; /* Light background color */
+  background-color: #000;
   position: relative;
 }
 
@@ -31,13 +31,13 @@ body {
   width: 90%;
   margin: 0 auto;
   height: 3px;
-  background-color: #d0d0d0; /* Light gray background */
+  background-color: #4d004c;
 }
 
 #progress {
   height: 100%;
   width: 100%;
-  background-color: #6ec1e4; /* Light blue */
+  background-color: #f0f;
 }
 
 .slide {
@@ -56,52 +56,52 @@ body {
 }
 
 #board .row:last-child div {
-  border-bottom: 1px solid #6ec1e4; /* Light blue border */
+  border-bottom: 1px solid #f0f;
 }
 
 .row div:last-child {
-  border-right: 1px solid #6ec1e4; /* Light blue border */
+  border-right: 1px solid #f0f;
 }
 
 .square {
   display: inline-block;
   width: 30px;
   height: 30px;
-  border-left: 1px solid #6ec1e4; /* Light blue border */
-  border-top: 1px solid #6ec1e4; /* Light blue border */
+  border-left: 1px solid #f0f;
+  border-top: 1px solid #f0f;
   cursor: pointer;
   transition: background-color 0.1s linear;
 }
 
 .square:hover {
-  background-color: #d1ecf1; /* Light hover effect */
+  background-color: #f0f4;
 }
 
 .orange {
-  background-color: #f5a623; /* Light orange */
+  background-color: #fa0;
 }
 
 .orange:hover {
-  background-color: #f5a623;
+  background-color: #fa0;
   cursor: unset;
 }
 
 .green {
-  background-color: #8bc34a; /* Light green */
+  background-color: #0f1;
 }
 
 .green:hover {
-  background-color: #8bc34a;
+  background-color: #0f1;
   cursor: unset;
 }
 
 .white {
-  background-color: #ffffff; /* White */
+  background-color: #fff;
   cursor: unset;
 }
 
 .white:hover {
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 #footer {
@@ -112,12 +112,12 @@ body {
   height: 40px;
   line-height: 40px;
   padding: 0 20px;
-  color: #6ec1e4; /* Light blue text */
+  color: #f0f;
   font-family: monospace;
 }
 
 #footer a {
-  color: #6ec1e4; /* Light blue links */
+  color: #f0f;
   margin-right: 30px;
 }
 
@@ -138,15 +138,14 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 10;
-  background-color: #ffffffb3; /* Semi-transparent white */
-  color: #333; /* Dark text */
+  background-color: #380038f2;
+  color: #fff;
   font-family: monospace;
 }
 
 .overlay h1 {
   text-align: center;
   font-size: 40px;
-  color: #333; /* Dark text */
 }
 
 .overlay .gameover {
@@ -154,13 +153,13 @@ body {
 }
 
 .overlay .gameover a {
-  color: #333; /* Dark text */
+  color: #fff;
   cursor: pointer;
   padding: 3px;
 }
 
 .overlay .gameover a:hover {
-  border-bottom: 2px solid #333; /* Dark hover */
+  border-bottom: 2px solid;
 }
 
 .overlay .gameover h1 {
@@ -169,7 +168,6 @@ body {
 
 .overlay #play-again {
   font-size: 30px;
-  color: #333; /* Dark text */
 }
 
 .overlay .options {
@@ -179,14 +177,12 @@ body {
 .overlay .options a {
   margin: 10px;
   text-decoration: none;
-  color: #333; /* Dark text */
 }
 
 .overlay .text-holder {
   overflow-y: auto;
   height: 100%;
   margin: 0 120px;
-  color: #333; /* Dark text */
 }
 
 .overlay p {
@@ -198,12 +194,11 @@ body {
 .overlay .close {
   position: fixed;
   top: 15px;
-  right: 20px;
+  right: 20;
   font-size: 16px;
   cursor: pointer;
-  color: #333; /* Dark text */
 }
 
 .overlay .close:hover {
-  border-bottom: 2px solid #333; /* Dark hover */
+  border-bottom: 2px solid;
 }
