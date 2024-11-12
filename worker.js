@@ -1,3 +1,4 @@
+
 let cacheHits = 0;
 let cacheMisses = 0;
 let movesPlayed = 0;
@@ -402,3 +403,8 @@ function startClock() {
 function stopClock() {
   timeElapsed += performance.now() - startTime;
 }
+
+
+
+
+//This code implements a minimax AI with alpha-beta pruning to evaluate and choose optimal moves in a game.
