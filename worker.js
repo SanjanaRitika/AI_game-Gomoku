@@ -1,3 +1,4 @@
+
 let cacheHits = 0;
 let cacheMisses = 0;
 let movesPlayed = 0;
@@ -55,51 +56,58 @@ function bestMove(matrix) {
   return move;
 }
 
-function alphabeta(matrix, depth, alpha, beta, isAiTurn) {
-  if (checkCache(matrix) !== false) {
-    return checkCache(matrix);
+function alphabeta(matrix, depth, alpha, beta, isAiTurn, startTime, timeLimit) {
+  // Check if the time limit is exceeded for early stopping
+  if (performance.now() - startTime > timeLimit) {
+      // Return an approximate evaluation of the current state
+      return staticEval(matrix);
   }
 
-  let winner = this.checkWinner(matrix);
-  if (winner) {
-    putCache(matrix, -9999 * winner);
-
-    return -9999 * winner;
-  }
-
-  // stop at MAX_DEPTH
+  // Depth-based stopping mechanism
   if (depth >= MAX_DEPTH) {
-    let eval = staticEval(matrix);
-    return eval;
+      return staticEval(matrix);
   }
 
-  // if AI's turn, we want to maximize score
-  let best = isAiTurn ? -Infinity : Infinity;
-  let squares = getSquaresToCheck(matrix);
+  let best;
+  if (isAiTurn) {
+      best = -Infinity;
+      const squares = getSquaresToCheck(matrix);
+      
+      for (const [y, x] of squares) {
+          matrix[y][x] = -1;  // AI move
+          const score = alphabeta(matrix, depth + 1, alpha, beta, false, startTime, timeLimit);
+          matrix[y][x] = 0;    // Undo move
 
-  for (let i = 0; i < squares.length; i++) {
-    let [y, x] = squares[i];
-    matrix[y][x] = isAiTurn ? -1 : 1;
+          best = Math.max(best, score);
+          alpha = Math.max(alpha, best);
 
-    let score = alphabeta(matrix, depth + 1, alpha, beta, !isAiTurn);
-    best = isAiTurn ? Math.max(score, best) : Math.min(score, best);
+          // Prune remaining branches
+          if (beta <= alpha) {
+              break;
+          }
+      }
+  } else {
+      best = Infinity;
+      const squares = getSquaresToCheck(matrix);
 
-    if (isAiTurn) {
-      alpha = Math.max(alpha, best);
-    } else {
-      beta = Math.min(beta, best);
-    }
+      for (const [y, x] of squares) {
+          matrix[y][x] = 1;  // Opponent's move
+          const score = alphabeta(matrix, depth + 1, alpha, beta, true, startTime, timeLimit);
+          matrix[y][x] = 0;  // Undo move
 
-    matrix[y][x] = 0;
+          best = Math.min(best, score);
+          beta = Math.min(beta, best);
 
-    if (alpha >= beta) {
-      break;
-    }
+          // Prune remaining branches
+          if (beta <= alpha) {
+              break;
+          }
+      }
   }
 
-  putCache(matrix, best);
   return best;
 }
+
 
 // enhance by checking for forced wins first
 // i.e. squares which can complete a 5 in a row
@@ -402,3 +410,8 @@ function startClock() {
 function stopClock() {
   timeElapsed += performance.now() - startTime;
 }
+
+
+
+
+//This code implements a minimax AI with alpha-beta pruning to evaluate and choose optimal moves in a game.

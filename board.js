@@ -73,7 +73,7 @@ class Board {
       right = 0,
       top = Infinity,
       bottom = 0;
-    const MATRIX_SIZE = 20;
+    const MATRIX_SIZE = 10;
 
     for (let i = 0; i < matrix.length; i++) {
       for (let j = 0; j < matrix[i].length; j++) {
@@ -88,9 +88,9 @@ class Board {
 
     if (padding) {
       left = Math.max(0, left - padding);
-      right = Math.min(MATRIX_SIZE, right + padding);
+      right = Math.min(MATRIX_SIZE - 1, right + padding);
       top = Math.max(0, top - padding);
-      bottom = Math.min(MATRIX_SIZE, bottom + padding);
+      bottom = Math.min(MATRIX_SIZE - 1, bottom + padding);
     }
 
     // always return square matrix
@@ -113,7 +113,7 @@ class Board {
         // add half to left and right
         let x = size - width;
         left = Math.max(0, left - Math.floor(x / 2));
-        right = Math.min(19, right + Math.floor(x / 2));
+        right = Math.min(9, right + Math.floor(x / 2));
         x = size - (right - left);
 
         if (x) {
@@ -126,7 +126,7 @@ class Board {
       } else if (height !== size) {
         let x = size - height;
         top = Math.max(0, top - Math.floor(x / 2));
-        bottom = Math.min(19, bottom + Math.floor(x / 2));
+        bottom = Math.min(9, bottom + Math.floor(x / 2));
         x = size - (bottom - top);
 
         if (x) {
@@ -198,9 +198,9 @@ class Board {
 
     // move masks across matrix and check for matches
     for (let i = 0; i < matrix.length - IN_A_ROW; i++) {
-      // i = 0 -> 14
+      // i = 0 -> 5
       for (let j = 0; j < matrix[i].length; j++) {
-        // j = 0 -> 19
+        // j = 0 -> 9
         let resH = 1,
           resV = 1,
           resD1 = 1,
@@ -302,8 +302,8 @@ class Board {
       // shuffle list
       squareList.sort(() => Math.random() - 0.5);
 
-      for (let i = 0; i < squareList.length; i += 10) {
-        let promises = Array.from({ length: 10 }, (k, v) => v);
+      for (let i = 0; i < squareList.length; i += 5) {
+        let promises = Array.from({ length: 5 }, (k, v) => v);
         promises = promises.map((a) => {
           let num = squareList[i + a];
           let x = num % boardSize,
@@ -318,8 +318,8 @@ class Board {
       // shuffle list again
       squareList.sort(() => Math.random() - 0.5);
 
-      for (let i = squareList.length - 1; i > 0; i -= 10) {
-        let promises = Array.from({ length: 10 }, (k, v) => v);
+      for (let i = squareList.length - 1; i > 0; i -= 5) {
+        let promises = Array.from({ length: 5 }, (k, v) => v);
         promises = promises.map((a) => {
           let num = squareList[i - a];
           let x = num % boardSize,
